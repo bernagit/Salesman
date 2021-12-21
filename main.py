@@ -1,6 +1,11 @@
 import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy import distance
+import requests
+
+
+#######
+# 
 
 workbook = pd.read_excel("./indirizzi.xlsx", index_col=0)
 
@@ -19,4 +24,19 @@ for address in values:
     coordinates.append(([location.latitude], [location.longitude]))
 
 print(coordinates)
-# print(distance.distance((coordinates[0][0], coordinates[0][1]), (coordinates[1][0], coordinates[1][1])).km)
+
+
+body = {"locations":[coordinates]}
+
+headers = {
+    'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
+    'Authorization': '5b3ce3597851110001cf62484d1f0bcaa7f34641914687a66ef18679',
+    'Content-Type': 'application/json; charset=utf-8'
+}
+call = requests.post('https://api.openrouteservice.org/v2/matrix/driving-car', json=body, headers=headers)
+
+print(call.status_code, call.reason)
+print(call.text)
+
+
+
