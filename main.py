@@ -1,10 +1,8 @@
-from inspect import CO_ITERABLE_COROUTINE
-from math import e
 import pandas as pd
 from geopy.geocoders import Nominatim
 from geopy import distance
 import requests
-
+import json
 
 workbook = pd.read_excel("./indirizzi.xlsx", index_col=0)
 
@@ -35,5 +33,10 @@ call = requests.post('https://api.openrouteservice.org/v2/matrix/driving-car', j
 
 print(call.status_code, call.reason)
 response = call.text
+
+#write response in an outfile
+with open('data.json', 'w') as outfile:
+    json.dump(response, outfile)
+
 print(response)
 
