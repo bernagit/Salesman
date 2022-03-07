@@ -26,7 +26,7 @@ body = {"locations":coordinates, "metrics":["distance"],"units":"km"}
 
 headers = {
     'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
-    'Authorization': '5b3ce3597851110001cf62484d1f0bcaa7f34641914687a66ef18679',
+    'Authorization': '',
     'Content-Type': 'application/json; charset=utf-8'
 }
 call = requests.post('https://api.openrouteservice.org/v2/matrix/driving-car', json=body, headers=headers)
